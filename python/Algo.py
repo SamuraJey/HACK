@@ -17,6 +17,7 @@ def algorithm(IFC_uid: str)->str:
     Hex = ''.join(Hex_buffer)
     return Hex
 
-
+if __name__ == "__main__":
+    print(algorithm("Bu9bIDNyVc8gvAda_u5hkD"))
 
 

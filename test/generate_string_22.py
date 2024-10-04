@@ -2,6 +2,8 @@ import random
 import string
 from Algo import * 
 
+rand_strings = 10**6
+copys = 100
 
 def generate_random_string(length=22):
     """Generates a random string of specified length.
@@ -33,8 +35,21 @@ def generate_random_string(length=22):
 
 
 # Get a 22-character random string
-with open('test/test_data.txt', 'a') as file1, open('test/test_answers.txt', 'w') as file2:
-    for i in range(10**6):
+random_strings_arr = []
+answer_strings_arr = []
+with open('test/test_data.txt', 'w') as file1, open('test/test_answers.txt', 'w') as file2:
+    for i in range(rand_strings):
         random_string = generate_random_string()
-        file1.write(random_string + '\n')
-        file2.write(algorithm(random_string) + '\n')
+        random_strings_arr.append(random_string)
+
+        answer_string = algorithm(random_string)
+        answer_strings_arr.append(answer_string)
+        
+    random_strings = '\n'.join(random_strings_arr)
+    answer_strings = '\n'.join(answer_strings_arr)
+    for i in range(copys):
+        file1.write(random_strings + '\n')
+        file2.write(answer_strings + '\n')
+    
+    
+print("DONE!!!!!!!!!!!!!!")
