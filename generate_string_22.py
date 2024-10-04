@@ -32,8 +32,7 @@ def generate_random_string(length=22):
 
 
 # Get a 22-character random string
-random_string = generate_random_string()
-
-# Print the generated string (or an error message if generation failed)
-if random_string:
-    print(f"Generated string: {random_string}")
+with open(f'random_strings.txt', 'w') as file:
+    for i in range(10):
+        random_string = generate_random_string()
+        file.write(random_string + '\n')
