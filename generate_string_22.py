@@ -1,5 +1,6 @@
 import random
 import string
+from Algo import * 
 
 
 def generate_random_string(length=22):
@@ -32,7 +33,8 @@ def generate_random_string(length=22):
 
 
 # Get a 22-character random string
-with open(f'random_strings.txt', 'w') as file:
+with open('test_data.txt', 'w') as file1, open('test_answers.txt', 'w') as file2:
     for i in range(10):
         random_string = generate_random_string()
-        file.write(random_string + '\n')
+        file1.write(random_string + '\n')
+        file2.write(algorithm(random_string) + '\n')
