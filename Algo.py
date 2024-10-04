@@ -1,7 +1,7 @@
 def isOne(char:str)->bool:
     return ord("A")<=ord(char)<=ord("Z")
 
-def GetMask(IFC_uid: str)->str:
+def algorithm(IFC_uid: str)->str:
     mask = 0
     for ch in IFC_uid:
         mask = mask << 1 | isOne(ch)
@@ -15,8 +15,7 @@ def GetMask(IFC_uid: str)->str:
     Hex_buffer.extend("00")
     Hex_buffer.reverse()
     Hex = ''.join(Hex_buffer)
-    print(Hex)
-    return Hex  
+    return Hex
 
 
 

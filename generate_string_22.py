@@ -28,7 +28,7 @@ def generate_random_string(length=22):
 
     except Exception as e:
         print(f"An error occurred: {e}")
-        return None
+    return None
 
 
 # Get a 22-character random string
