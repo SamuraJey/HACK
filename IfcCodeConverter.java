@@ -25,3 +25,9 @@ public class IfcCodeConverter {
         while (binaryString.length() < 32) {
             binaryString.insert(0, '0');
         }
+        int decimalValue = Integer.parseInt(binaryString.toString(), 2);
+        String hexString = Integer.toHexString(decimalValue);
+
+        System.out.println("Шестнадцатеричное представление: " + hexString.toUpperCase());
+    }
+}
