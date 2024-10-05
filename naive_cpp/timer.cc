@@ -9,8 +9,8 @@
 
 
 int main() {
-
-    std::ifstream file("../test/test_data.txt");
+    // std::ios::sync_with_stdio(false);
+    std::ifstream file("../test/test_data_22gb.txt");
     if (!file.is_open()) {
         std::cerr << "Failed to open file" << std::endl;
         return 1;
@@ -31,7 +31,7 @@ int main() {
 
     file.close();
 
-    std::ofstream time_file("time.txt");
+    std::ofstream time_file("time_cpp_22gb.txt");
             if (!time_file.is_open()) {
                 std::cerr << "Failed to open errors.txt for writing" << std::endl;
                 return 1;

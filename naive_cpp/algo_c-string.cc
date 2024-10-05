@@ -3,11 +3,13 @@
 #include <cctype>
 #include <algorithm>
 #include <iostream>
+#include <fstream>
 
 inline bool isOne(char ch) {
     return 'A' <= ch && ch <= 'Z';
 }
 
+__attribute__((noinline))
 void algorithm(const char* IFC_uid, char* hex_result) {
     long long int mask = 0;
     for (size_t i = 0; i < 22; ++i) {
@@ -19,14 +21,29 @@ void algorithm(const char* IFC_uid, char* hex_result) {
     while (mask) {
         hex_result[--i] = table[mask & 0b1111];
         mask >>= 4;
-    };
+    }
+    hex_result[8] = '\0'; // Null-terminate the result
 }
 
 // int main() {
-//     const char* IFC_uid = "7AkhabfbJvr_$6J0GVGk9M";
-//     char result[9];
-//     algorithm(IFC_uid, result);
-//     std::cout << result << std::endl;
-//     // 00120CC1
-//     //0023a101
+//     std::ios::sync_with_stdio(false);
+//     std::ifstream file("../test/test_data_2gb.txt");
+//     if (!file.is_open()) {
+//         std::cerr << "Failed to open file" << std::endl;
+//         return 1;
+//     }
+//     std::ofstream file2 ("../test/test_answers_22gb.txt.tmp");
+//     if (!file2.is_open()) {
+//         std::cerr << "Failed to open file" << std::endl;
+//         return 1;
+//     }
+
+//     std::string IFC_line;
+//     while (std::getline(file, IFC_line)) {
+//         const char* IFC_uid = IFC_line.c_str();
+//         char result[9];
+//         algorithm(IFC_uid, result);
+//         file2 << result << std::endl;
+//     }
+
 // }
