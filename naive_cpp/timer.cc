@@ -1,44 +1,40 @@
-#include "algo_c-string.cc"
-
+#include <chrono>
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
-#include <chrono>
 
-
+#include "algo_c-string.cc"
 
 int main() {
-
-    std::ifstream file("../test/test_data.txt");
-    if (!file.is_open()) {
-        std::cerr << "Failed to open file" << std::endl;
-        return 1;
+    std::ifstream file_len("../test/test_data.txt", std::ios::binary | std::ios::ate);  // Open file and seek to end
+    if (!file_len.is_open()) {
+        throw std::runtime_error("Failed to open file");
     }
+    size_t len = file_len.tellg();
+    std::ifstream file("../test/test_data.txt", std::ios::in | std::ios::binary);
+    char* buffer = new char[len];
+    file.read(buffer, len);
 
-    
-    std::string IFC_line;
-    size_t count = 0;
+    char const* IFC_uid = buffer;
+    char const* buffer_end = buffer + len;
     auto start = std::chrono::high_resolution_clock::now();
-    while (std::getline(file, IFC_line)) {
-        count ++;
-        const char* IFC_uid = IFC_line.c_str();
-        char result[9];
+    char result[9];
+    for (; IFC_uid < buffer_end; IFC_uid += 24) {
         algorithm(IFC_uid, result);
     }
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = end - start;
 
-    file.close();
-
     std::ofstream time_file("time.txt");
-            if (!time_file.is_open()) {
-                std::cerr << "Failed to open errors.txt for writing" << std::endl;
-                return 1;
-            }
-    time_file << "Iterations: " << count<< '\n';
-    time_file << "duration: " << duration.count() / 1000000000.0 << "s\n";
-    //000000000
-    time_file << "time per string: " << duration.count() / count << "ns" << std::endl;
-    time_file.close();
+    if (!time_file.is_open()) {
+        std::cerr << "Failed to open errors.txt for writing" << std::endl;
+        return 1;
     }
+    time_file << "Iterations: " << (len / 24) << '\n';
+    time_file << "duration: " << duration.count() / 1000000000.0 << "s\n";
+    // 000000000
+    time_file << "time per string: " << duration.count() / (len / 24.) << "ns" << std::endl;
+    time_file.close();
+    std::cout << "done" << std::endl;
+}

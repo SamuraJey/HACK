@@ -3,15 +3,16 @@
         {
             "type": "cppbuild",
             "label": "C/C++: g++ сборка активного файла",
-            "command": "/usr/bin/g++",
+            "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
-                "-g",
                 "-march=native",
-            "-mtune=native",
+                "-mtune=native",
+                "-g",
+                "-fno-delete-null-pointer-checks",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}.exe"
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
             "options": {
                 "cwd": "${fileDirname}"
