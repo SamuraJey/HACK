@@ -12,9 +12,8 @@ void algorithm(const char* IFC_uid, char* hex_result) {
     }
     static char const table[] = "0123456789ABCDEF";
     int i = 8;
-    *(long long int*)hex_result = 0x3030303030303030ULL;
-    while (mask) {
+    *(long long int*)hex_result = 0x3030303030303030ULL;  // = "00000000"
+    do {
         hex_result[--i] = table[mask & 0b1111];
-        mask >>= 4;
-    };
+    } while (mask >>= 4);
 }

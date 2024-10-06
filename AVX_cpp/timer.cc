@@ -7,7 +7,6 @@
 #include "algo_c-string.cc"
 
 int main() {
-    // std::ios::sync_with_stdio(false);
     std::ifstream file_len("../test/test_data.txt", std::ios::binary | std::ios::ate);  // Open file and seek to end
     if (!file_len.is_open()) {
         throw std::runtime_error("Failed to open file");
@@ -34,7 +33,7 @@ int main() {
     }
     time_file << "Iterations: " << (len / 24) << '\n';
     time_file << "duration: " << duration.count() / 1000000000.0 << "s\n";
-
+    // 000000000
     time_file << "time per string: " << duration.count() / (len / 24.) << "ns" << std::endl;
     time_file << "calls per second: " << (len / 24.) * 1000.0 / duration.count() << " milions" << std::endl;
     time_file.close();

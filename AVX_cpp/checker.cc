@@ -1,10 +1,9 @@
 #include <cstring>
 #include <fstream>
 #include <iostream>
-#include <string>
 #include <vector>
 
-#include "algo_c-string.cc"
+#include "algo_avx.cc"
 
 int main() {
     std::ifstream file("../test/test_data.txt");
