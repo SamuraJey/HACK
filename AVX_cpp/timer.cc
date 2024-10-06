@@ -1,10 +1,8 @@
 #include <chrono>
 #include <fstream>
 #include <iostream>
-#include <string>
-#include <vector>
 
-#include "algo_c-string.cc"
+#include "algo_avx.cc"
 
 int main() {
     std::ifstream file_len("../test/test_data.txt", std::ios::binary | std::ios::ate);  // Open file and seek to end
@@ -12,14 +10,26 @@ int main() {
         throw std::runtime_error("Failed to open file");
     }
     size_t len = file_len.tellg();
+    file_len.close();
     std::ifstream file("../test/test_data.txt", std::ios::in | std::ios::binary);
     char* buffer = new char[len];
     file.read(buffer, len);
+    file.close();
 
     char const* IFC_uid = buffer;
     char const* buffer_end = buffer + len;
-    auto start = std::chrono::high_resolution_clock::now();
     char result[9];
+    char const* it = buffer;
+    while (it < buffer + 25) {
+        std::cout << (int)*it << '\n';
+        it += 1;
+    }
+    if (it >= buffer_end) {
+        std::cout << "no new lines\n";
+    } else {
+        std::cout << reinterpret_cast<uintptr_t>(it) - reinterpret_cast<uintptr_t>(buffer) << '\n';
+    }
+    auto start = std::chrono::high_resolution_clock::now();
     for (; IFC_uid < buffer_end; IFC_uid += 24) {
         algorithm(IFC_uid, result);
     }

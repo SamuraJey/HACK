@@ -8,6 +8,7 @@
                 "-fdiagnostics-color=always",
                 "-march=native",
                 "-mtune=native",
+                //"-O3",
                 "-g",
                 "-fno-delete-null-pointer-checks",
                 "${file}",
